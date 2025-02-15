@@ -94,9 +94,19 @@ router.post('/login', async (req, res) => {
 });
 
 // Logout route
-router.post('/logout', (req, res) => {
-    res.clearCookie('token');
-    res.json({ message: 'Logged out successfully' });
+router.all('/logout', (req, res) => {
+    let hasResponded = false;
+    // Clear the session
+    req.session.destroy((err) => {
+        if (err) {
+            console.error('Error destroying session:', err);
+        }
+        if (!hasResponded) {
+            hasResponded = true;
+            res.clearCookie('token');
+            res.redirect('/login');
+        }
+    });
 });
 
 // Check auth status

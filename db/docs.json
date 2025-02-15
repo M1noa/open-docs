@@ -1,0 +1,52 @@
+{
+  "docs": [
+    {
+      "id": "1739589347513",
+      "name": "how",
+      "repoUrl": "https://github.com/M1noa/how",
+      "branch": "main",
+      "directory": "",
+      "token": "",
+      "primaryColor": "#8b5cf6",
+      "secondaryColor": "#7c3aed",
+      "backgroundColor": "#0F172A",
+      "textColor": "#E2E8F0",
+      "linkColor": "#60a5fa",
+      "customization": {
+        "css": "",
+        "js": "",
+        "html": "",
+        "theme": {
+          "defaultMode": "dark",
+          "allowToggle": true
+        },
+        "animations": {
+          "enabled": true,
+          "duration": 0.5,
+          "type": "fade",
+          "elements": {
+            "navigation": {
+              "type": "slide",
+              "duration": 0.3,
+              "direction": "left"
+            },
+            "content": {
+              "type": "fade",
+              "duration": 0.5
+            },
+            "sidebar": {
+              "type": "slide",
+              "duration": 0.3,
+              "direction": "right"
+            }
+          }
+        },
+        "layout": {
+          "maxWidth": "1200px",
+          "contentWidth": "850px",
+          "sidebarWidth": "280px"
+        }
+      }
+    }
+  ]
+}

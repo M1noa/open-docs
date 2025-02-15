@@ -1,19 +1,19 @@
 :root {
     --primary-color: #9683ec;
     --secondary-color: #7c65e3;
-    --background-color: #f8f7ff;
-    --text-color: #333;
+    --background-color: #1a1a2e;
+    --text-color: #e1e1e1;
     --error-color: #dc3545;
     --success-color: #28a745;
-    --card-bg: rgba(255, 255, 255, 0.1);
+    --card-bg: rgba(255, 255, 255, 0.05);
     --backdrop-blur: 10px;
 }
 
-/* Dark theme variables */
-.dark-theme {
-    --background-color: #1a1a2e;
-    --text-color: #e1e1e1;
-    --card-bg: rgba(255, 255, 255, 0.05);
+/* Light theme variables */
+.light-theme {
+    --background-color: #f8f7ff;
+    --text-color: #333;
+    --card-bg: rgba(255, 255, 255, 0.1);
 }
 
 /* Main styles */
