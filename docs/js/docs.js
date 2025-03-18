@@ -18,71 +18,77 @@ themeToggle.innerHTML = `
     </svg>
 `;
 
-document.body.appendChild(themeToggle);
+// Insert theme toggle button in the navbar
+const navbarNav = document.querySelector('#navbarNav');
+navbarNav.insertAdjacentElement('beforebegin', themeToggle);
 
-// Theme toggle functionality with animation
+// Theme toggle functionality
+const setTheme = (theme) => {
+    if (theme === 'dark') {
+        document.body.classList.add('dark-mode');
+    } else {
+        document.body.classList.remove('dark-mode');
+    }
+    localStorage.setItem('theme', theme);
+};
+
+// Initialize theme from localStorage
+const savedTheme = localStorage.getItem('theme') || 'dark';
+setTheme(savedTheme);
+
+// Theme toggle event listener
 themeToggle.addEventListener('click', () => {
-    document.body.style.transition = 'background-color 0.3s, color 0.3s';
-    document.body.classList.toggle('dark-mode');
-    localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+    const newTheme = document.body.classList.contains('dark-mode') ? 'light' : 'dark';
+    setTheme(newTheme);
 });
 
-// Set initial theme
-if (localStorage.getItem('theme') === 'light') {
-    document.body.classList.remove('dark-mode');
-}
-
-// Navigation generation with animations
+// Navigation generation
 const generateNavigation = () => {
     const docNav = document.getElementById('doc-nav');
-    const headers = document.querySelectorAll('.doc-content h1, .doc-content h2, .doc-content h3');
+    const headers = document.querySelectorAll('.doc-content h1, .doc-content h2');
     const nav = document.createElement('ul');
     nav.className = 'doc-nav';
 
-    headers.forEach((header, index) => {
+    let currentSection = null;
+    let currentList = nav;
+
+    headers.forEach((header) => {
+        const level = parseInt(header.tagName[1]);
+        const id = header.id || header.textContent.toLowerCase().replace(/[^\w]+/g, '-');
+        if (!header.id) header.id = id;
+
         const li = document.createElement('li');
         li.className = 'doc-nav-item';
-        li.style.opacity = '0';
-        li.style.transform = 'translateX(-20px)';
-        
+
         const a = document.createElement('a');
         a.className = 'doc-nav-link';
-        a.href = `#${header.id || `section-${index}`}`;
-        if (!header.id) header.id = `section-${index}`;
+        a.href = `#${id}`;
         a.textContent = header.textContent;
-        a.style.paddingLeft = `${(header.tagName[1] - 1) * 1}rem`;
-        
-        li.appendChild(a);
-        nav.appendChild(li);
 
-        // Animate nav items
-        setTimeout(() => {
-            li.style.transition = 'opacity 0.5s, transform 0.5s';
-            li.style.opacity = '1';
-            li.style.transform = 'translateX(0)';
-        }, index * 100);
+        if (level === 1) {
+            currentSection = li;
+            currentList = nav;
+        } else {
+            if (!currentSection) return;
+            
+            if (!currentSection.querySelector('ul')) {
+                const ul = document.createElement('ul');
+                ul.className = 'doc-nav-nested';
+                currentSection.appendChild(ul);
+            }
+            currentList = currentSection.querySelector('ul');
+        }
+
+        li.appendChild(a);
+        currentList.appendChild(li);
     });
 
+    docNav.innerHTML = '';
     docNav.appendChild(nav);
 };
 
 // Initialize navigation when content is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    generateNavigation();
-    
-    // Add animation classes to content sections
-    const sections = document.querySelectorAll('.doc-content > *');
-    sections.forEach((section, index) => {
-        section.style.opacity = '0';
-        section.style.transform = 'translateY(20px)';
-        
-        setTimeout(() => {
-            section.style.transition = 'opacity 0.5s, transform 0.5s';
-            section.style.opacity = '1';
-            section.style.transform = 'translateY(0)';
-        }, index * 100);
-    });
-});
+document.addEventListener('DOMContentLoaded', generateNavigation);
 
 // Smooth scrolling for navigation links
 document.addEventListener('click', (e) => {

@@ -3,18 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${doc.name} - Documentation</title>
+    <title>${doc.name}</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/style.css" rel="stylesheet">
     <link href="/css/docs.css" rel="stylesheet">
-    <style>
-        :root {
-            --primary-color: ${doc.primaryColor || '#8b5cf6'};
-            --primary-color-dark: ${doc.primaryColor ? adjustColorBrightness(doc.primaryColor, -20) : '#7c3aed'};
-        }
-        ${doc.customization?.css || ''}
-    </style>
 </head>
 <body class="dark-mode">
     <div class="docs-container">
@@ -26,9 +18,7 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/dash">Dashboard</a>
-                        </li>
+                        <!-- Dashboard link removed as requested -->
                     </ul>
                 </div>
             </div>
@@ -41,9 +31,15 @@
                         <div id="doc-nav"></div>
                     </div>
                 </div>
-                <div class="col-md-9">
+                <div class="col-md-6">
                     <div class="doc-content">
                         ${htmlContent}
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="right-sidebar">
+                        <h3>On This Page</h3>
+                        <div id="on-this-page"></div>
                     </div>
                 </div>
             </div>
