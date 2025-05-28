@@ -1,4 +1,5 @@
 # Open-Docs
+## !! THIS HASNT BEEN FINISHED AND I PROBABLY WONT EVER FINISH IT AS I AM OVERWHELMED WITH PROJECTS ATM !!
 
 Open-Docs is an open-source documentation platform that allows you to create and manage beautiful documentation sites directly from your Git repositories. It automatically organizes your markdown files into a structured, easy-to-navigate documentation website.
 
